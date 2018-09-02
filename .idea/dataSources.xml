@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="User Data Source [4] -" uuid="6d86742f-ff9e-4eda-8b1b-449382e9525d">
+      <driver-ref>371a007d-db8b-4b63-a8d1-89afc9356194</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>java.sql.Driver</jdbc-driver>
+    </data-source>
+  </component>
+</project>

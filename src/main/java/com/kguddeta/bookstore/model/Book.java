@@ -1,5 +1,6 @@
 package com.kguddeta.bookstore.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,13 +11,27 @@ public class Book {
     @Id
     @GeneratedValue
     private Long id;
+
     private String isbn;
+
+    @Column(length = 200)
     private String title;
+
+    @Column(name = "unit_cost")
     private Float unitCost;
+
+    @Column(name = "nb_of_pages")
     private Integer nbOfPages;
+
     private Language language;
+
+    @Column(name = "publication_date")
     private Date publicationDate;
+
+    @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(length = 1000)
     private String description;
 
     public Book(){
