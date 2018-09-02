@@ -52,6 +52,11 @@ public class BookRepositoryTest {
 
     }
 
+    @Test(expected = Exception.class)
+    public void findBookWithInvalidId(){
+        bookRepository.find(null);
+    }
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
