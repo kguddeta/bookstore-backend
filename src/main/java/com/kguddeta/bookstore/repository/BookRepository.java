@@ -1,7 +1,11 @@
 package com.kguddeta.bookstore.repository;
 
+import com.kguddeta.bookstore.Util.IsbnGenerator;
+import com.kguddeta.bookstore.Util.NumberGenerator;
+import com.kguddeta.bookstore.Util.TextUtil;
 import com.kguddeta.bookstore.model.Book;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,12 +21,20 @@ public class BookRepository {
     @PersistenceContext(unitName = "bookStorePU")
     private EntityManager em;
 
+    @Inject
+    private TextUtil textUtil;
+
+    @Inject
+    private NumberGenerator numberGenerator;
+
     public Book find(@NotNull Long id){
         return em.find(Book.class,id);
     }
 
     @Transactional(REQUIRED)
     public Book create(Book book){
+        book.setTitle(textUtil.sanitize(book.getTitle()));
+        book.setIsbn(numberGenerator.generateNumber());
         em.persist(book);
         return book;
     }

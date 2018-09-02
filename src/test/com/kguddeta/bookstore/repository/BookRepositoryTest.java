@@ -1,5 +1,8 @@
 package com.kguddeta.bookstore.repository;
 
+import com.kguddeta.bookstore.Util.IsbnGenerator;
+import com.kguddeta.bookstore.Util.NumberGenerator;
+import com.kguddeta.bookstore.Util.TextUtil;
 import com.kguddeta.bookstore.model.Book;
 import com.kguddeta.bookstore.model.Language;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -22,11 +25,10 @@ public class BookRepositoryTest {
 
     @Test
     public void create() {
-
         //Test counting books
         assertEquals(Long.valueOf(0),bookRepository.countAll());
         assertEquals(0,bookRepository.findAll().size());
-        Book book = new Book("isbn", "a title", 12F, 123, Language.ENGLISH, new Date(), "http://image_url", "description");
+        Book book = new Book("isbn", "a   title", 12F, 123, Language.ENGLISH, new Date(), "http://image_url", "description");
         book = bookRepository.create(book);
         Long bookId = book.getId();
 
@@ -38,6 +40,7 @@ public class BookRepositoryTest {
 
         //check the found book
         assertEquals("a title",bookFound.getTitle());
+        assertTrue(bookFound.getIsbn().startsWith("13"));
 
         //Test counting books
         assertEquals(Long.valueOf(1),bookRepository.countAll());
@@ -63,6 +66,9 @@ public class BookRepositoryTest {
                 .addClass(BookRepository.class)
                 .addClass(Book.class)
                 .addClass(Language.class)
+                .addClass(TextUtil.class)
+                .addClass(NumberGenerator.class)
+                .addClass(IsbnGenerator.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml");
     }
